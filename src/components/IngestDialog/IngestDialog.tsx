@@ -63,7 +63,7 @@ export const IngestDialog = ({ open, onClose }: IngestDialogParams) => {
           onClick={handleUpload}
           variant="contained"
           disabled={isUploading || files.length === 0}
-          sx={{ backgroundColor: theme.palette.button.contrastText }}
+          sx={{ backgroundColor: theme.palette.button.main }}
         >
           {isUploading ? "Uploading..." : "Upload"}
         </Button>
