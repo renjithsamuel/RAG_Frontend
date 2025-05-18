@@ -79,6 +79,8 @@ const quickActionMap: Record<string, string> = {
 
   "Steps to update firmware":
     "# ⚙️ Steps to Update Firmware\n\nStay cutting-edge with these quick steps:\n\n1. Download the latest firmware `.bin` from our website.\n2. Connect device via USB.\n3. Open terminal and run:\n\n   ```bash\n   sudo fw-update --file firmware_v2.0.bin --device /dev/ttyUSB0\n   ```\n4. Wait for the `Update successful` message.\n5. Reboot your device:\n\n   ```bash\n   sudo reboot\n   ```\n\n> _Warning:_ Don’t pull the plug mid-flash or you’ll be staring at a brick. Literally. 😅",
+  "Configure network settings":
+    "# 🌐 Configure Network Settings\n\nTime to plug your device into the Matrix. Here's how to set it up:\n\n1. Go to **Settings → Network**.\n2. Choose your connection type:\n   - **Wi-Fi** (lazy wireless warrior 🧘‍♂️)\n   - **Ethernet** (for those who live life in the fast lane 🏎️)\n3. For Wi-Fi:\n   - Click **Scan** and select your network.\n   - Enter the **Wi-Fi password** (no typos, please 🙏).\n4. For Ethernet:\n   - Plug the cable in... that’s it, you're done. Welcome to 1999.\n5. (Optional) Assign a static IP if you're feeling fancy:\n\n   ```bash\n   sudo ifconfig eth0 192.168.1.100 netmask 255.255.255.0\n   ```\n\n6. Test it with:\n\n   ```bash\n   ping google.com\n   ```\n\n> _Tip:_ No connection? Try turning it off and on again. Classic IT wizardry. 🧙‍♂️",
 };
 
 type QuickActionKey = keyof typeof quickActionMap;

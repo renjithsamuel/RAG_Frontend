@@ -22,7 +22,7 @@ export const useQuickActionsStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     marginBottom: themeValues.spacing(2),
     // backgroundColor: "red",
-    width: "60%",
+    width: "50%",
   },
   actionsContainer: { 
     gap: themeValues.spacing(1),

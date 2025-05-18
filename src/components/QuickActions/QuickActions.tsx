@@ -25,10 +25,11 @@ export const QuickActions = ({ onActionClick }: QuickActionsParams) => {
     "Activate license key",
     "Set user permissions",
     "Steps to update firmware",
+    "Configure network settings",
   ];
 
   return (
-    <Box className={classes.container} sx={{ marginLeft: navBarOpen ? 0 : theme.spacing(30) }}>
+    <Box className={classes.container} sx={{ marginLeft: navBarOpen ? theme.spacing(20) : theme.spacing(60) }}>
       <Image
         src="/applied-logo.svg"
         alt="Applied Materials"
