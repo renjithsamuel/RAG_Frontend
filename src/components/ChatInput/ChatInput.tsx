@@ -6,13 +6,13 @@ import { IoIosSend } from "react-icons/io";
 import { GoPaperclip } from "react-icons/go";
 
 interface ChatInputParams {
-  onSend: (message: string) => void;
+  onSend: (question: string) => void;
 }
 
 export const ChatInput = ({ onSend }: ChatInputParams) => {
   const theme = useTheme();
   const classes = useChatInputStyles();
-  const { message, handleInput, handleSubmit } = useChatInput(onSend);
+  const { question, handleInput, handleSubmit } = useChatInput(onSend);
 
   return (
     <Box className={classes.root}>
@@ -28,7 +28,7 @@ export const ChatInput = ({ onSend }: ChatInputParams) => {
           fullWidth
           multiline
           maxRows={8}
-          value={message}
+          value={question}
           onChange={handleInput}
           className={classes.input}
           onKeyPress={(e) => {

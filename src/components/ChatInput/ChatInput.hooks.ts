@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { usePageContext } from "doc-bot/context/PageContext";
+import { useChatQuery } from "doc-bot/pyconnection/Chat/queryRAG";
+import { useEffect, useState } from "react";
 
 interface ChatInputHook {
-  message: string;
+  question: string;
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: () => void;
 }
@@ -9,18 +11,40 @@ interface ChatInputHook {
 export const useChatInput = (
   onSend: (message: string) => void
 ): ChatInputHook => {
-  const [message, setMessage] = useState("");
+  const [question, setQuestion] = useState("");
+  const chatQuery = useChatQuery();
+  const { setMessages } = usePageContext();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
+    setQuestion(e.target.value);
   };
 
   const handleSubmit = () => {
-    if (message.trim()) {
-      onSend(message);
-      setMessage("");
+    if (question.trim()) {
+      // add user message
+      onSend(question);
+
+      // Add bot message
+      chatQuery.mutate(question, {
+        onSuccess: (data) => {
+          setMessages((prev) => [
+            ...prev,
+            { content: data.answer, isUser: false },
+          ]);
+        },
+        onError: (err) => {
+          // optional: show an error message
+          setMessages((prev) => [
+            ...prev,
+            { content: `Oops, something broke: ${err.message}`, isUser: false },
+          ]);
+        },
+      });
+
+      //  clean up the input field
+      setQuestion("");
     }
   };
 
-  return { message, handleInput, handleSubmit };
+  return { question, handleInput, handleSubmit };
 };
