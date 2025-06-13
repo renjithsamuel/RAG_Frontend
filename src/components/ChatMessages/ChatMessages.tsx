@@ -1,5 +1,5 @@
 "use client";
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { useChatMessagesStyles } from "./ChatMessages.styles";
 import { useChatMessages } from "./ChatMessages.hooks";
 import ReactMarkdown from "react-markdown";
@@ -7,17 +7,26 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useEffect, useRef } from "react";
+import { ISource } from "doc-bot/entity/Content/Chat";
+import { SourceList } from "../SourceList/SourceList";
 
 interface ChatMessagesParams {
   messages: Array<{
     content: string;
     isUser: boolean;
+    sources: ISource[];
   }>;
 }
 
 export const ChatMessages = ({ messages }: ChatMessagesParams) => {
   const classes = useChatMessagesStyles();
-  const { formattedMessages } = useChatMessages({ messages });
+  const { formattedMessages } = useChatMessages({ messages }) as {
+    formattedMessages: Array<{
+      content: string;
+      isUser: boolean;
+      sources?: ISource[];
+    }>;
+  };
 
   const codeTheme = materialLight as { [key: string]: React.CSSProperties };
 
@@ -63,6 +72,12 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
           >
             {message.content}
           </ReactMarkdown>
+          {!message.isUser && message.sources && (
+            <>
+              <Divider sx={{ my: 2 }} />
+              <SourceList sources={message.sources} />
+            </>
+          )}
         </Box>
       ))}
       {/* THIS is the magic scroll anchor */}

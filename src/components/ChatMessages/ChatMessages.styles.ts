@@ -12,6 +12,7 @@ export const useChatMessagesStyles = makeStyles((theme) => ({
     width: "100%",
     maxWidth: "800px",
     margin: "0 auto",
+    marginBottom: theme.spacing(10),
   },
   message: {
     maxWidth: "85%",

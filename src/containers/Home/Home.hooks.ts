@@ -23,8 +23,8 @@ export const useHome = (): HomeHook => {
     //     ...prev,
     //     {
     //       content: `
-    // **🤖 Doc Bot:**  
-    // # Thank you for reaching out!  
+    // **🤖 Doc Bot:**
+    // # Thank you for reaching out!
     // ### Your message has been received and is important to us.
 
     // **Here's what you can do next:**
@@ -32,8 +32,7 @@ export const useHome = (): HomeHook => {
     // - Use **keywords** or **phrases** for more accurate answers.
     // - If you need help, just type \`help\`.
 
-
-    // _I'm here to assist you with all your document-related queries!_  
+    // _I'm here to assist you with all your document-related queries!_
     // `,
     //       isUser: false,
     //     },
@@ -52,6 +51,38 @@ export const useHome = (): HomeHook => {
         {
           content: quickActionMap[action],
           isUser: false,
+          sources: [
+            {
+              source: "Device_Manual.pdf",
+              content:
+                "To perform a factory reset, ensure the device is powered off. Locate the reset pinhole, insert a paperclip, and hold for 10 seconds. This will restore all settings to default and erase user data. Refer to the troubleshooting section for post-reset steps.",
+            },
+            {
+              source: "QuickStart_Guide.pdf",
+              content:
+                "Before resetting, disconnect all cables and peripherals. The reset process may take a few minutes. Once complete, the device will reboot automatically and display the initialization sequence on the main screen.",
+            },
+            {
+              source: "User_Guide.pdf",
+              content:
+                "After a factory reset, you must reconfigure your network settings and restore any backed-up data. The device will prompt you to complete the initial setup wizard, including language and region selection.",
+            },
+            {
+              source: "Troubleshooting_FAQ.pdf",
+              content:
+                "If the device does not respond after a reset, check the power supply and repeat the process. Persistent issues may require contacting technical support or referring to the advanced troubleshooting appendix.",
+            },
+            {
+              source: "Admin_Reference.pdf",
+              content:
+                "Factory resets are recommended before transferring ownership or disposing of the device. Always backup important files beforehand, as this process is irreversible and all user data will be lost.",
+            },
+            {
+              source: "Security_Best_Practices.pdf",
+              content:
+                "Performing a factory reset ensures that all personal information and credentials are removed from the device. This is a critical step for maintaining data privacy and security compliance.",
+            },
+          ],
         },
       ]);
     }, 500);
