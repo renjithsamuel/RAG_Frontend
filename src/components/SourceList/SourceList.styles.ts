@@ -1,5 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { themeValues } from "doc-bot/constants/ThemeConstants";
+import { scale } from "framer-motion";
 
 export const useSourceListStyles = makeStyles(() => ({
   wrapper: {
@@ -19,9 +20,9 @@ export const useSourceListStyles = makeStyles(() => ({
   },
   moreCard: {
     width: 100,
-    height: 80,
+    height: 70,
     background: "rgba(243, 247, 249, 0.95)",
-  border: "1px solid rgba(12, 36, 101, 0.2)",
+    border: "1px solid rgba(12, 36, 101, 0.2)",
     borderRadius: 20,
     backdropFilter: "blur(6px)",
     display: "flex",
@@ -29,5 +30,8 @@ export const useSourceListStyles = makeStyles(() => ({
     justifyContent: "center",
     color: "#0c2465",
     cursor: "pointer",
+    // "&:hover": {
+    //   scale: 1.03,
+    // },
   },
 }));

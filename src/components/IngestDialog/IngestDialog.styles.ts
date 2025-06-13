@@ -10,6 +10,7 @@ export const useIngestDialogStyles = makeStyles((theme) => ({
     backgroundColor: themeValues.color.backgroundGray,
     color: themeValues.color.textSecondary,
     transition: themeValues.transition.defaultTansition,
+
     "&:hover": {
       borderColor: themeValues.color.accentBlue,
       backgroundColor: themeValues.color.contentBackground,

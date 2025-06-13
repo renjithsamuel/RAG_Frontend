@@ -7,7 +7,7 @@ export const useSourceList = (sources: ISource[]) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const visibleSources = showAll ? sources : sources.slice(0, 2);
-  const handleMoreClick = () => setShowAll(true);
+  const handleMoreClick = () => setShowAll(!showAll);
   const openDialogWithIndex = (index: number) => {
     setSelectedIndex(index);
     setDialogOpen(true);
@@ -15,6 +15,7 @@ export const useSourceList = (sources: ISource[]) => {
   const closeDialog = () => setDialogOpen(false);
 
   return {
+    showAll,
     visibleSources,
     handleMoreClick,
     openDialogWithIndex,

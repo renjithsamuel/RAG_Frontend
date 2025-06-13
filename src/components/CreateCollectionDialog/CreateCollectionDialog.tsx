@@ -27,7 +27,7 @@ export const CreateCollectionDialog = ({ open, onClose, onCreate }: Props) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} sx={{        backdropFilter: "blur(5px)",}}>
       <DialogTitle sx={{ bgcolor: "#f3f7f9", width: "50vw" }}>
         <Typography variant="h3">Create New Collection</Typography>
       </DialogTitle>

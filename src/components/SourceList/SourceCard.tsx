@@ -24,19 +24,19 @@ export const SourceCard = ({
         border: "1px solid rgba(12, 36, 101, 0.2)",
         borderRadius: 2,
         width: 180,
-        height: 100,
-        padding: 2,
+        height: "10vh",
+        padding: 1.5,
         color: "#0c2465",
         backdropFilter: "blur(4px)",
         cursor: "pointer",
         overflow: "hidden",
       }}
     >
-      <Typography variant="caption" fontWeight={600}>
-        {data.source.split("\\").pop()} 
+      <Typography variant="subtitle2" fontWeight={600}>
+        {truncate(data.source.split("\\").pop() || '', 15)} 
         {/* - Page {data.page} */}
       </Typography>
-      <Typography variant="body2" mt={1}>
+      <Typography variant="caption" mt={1}>
         {truncate(data.content)}
       </Typography>
     </Box>

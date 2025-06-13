@@ -9,6 +9,7 @@ import { materialLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useEffect, useRef } from "react";
 import { ISource } from "doc-bot/entity/Content/Chat";
 import { SourceList } from "../SourceList/SourceList";
+import rehypeRaw from "rehype-raw";
 
 interface ChatMessagesParams {
   messages: Array<{
@@ -49,6 +50,7 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
         >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
             components={{
               code({ className, children, ...restProps }) {
                 const match = /language-(\w+)/.exec(className || "");

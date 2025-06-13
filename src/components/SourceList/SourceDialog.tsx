@@ -10,6 +10,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CloseIcon from "@mui/icons-material/Close";
 import { ISource } from "doc-bot/entity/Content/Chat";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 
 export const SourceDialog = ({
   open,
@@ -26,23 +29,41 @@ export const SourceDialog = ({
 }) => {
   const source = sources[currentIndex];
 
+  const [direction, setDirection] = useState<"left" | "right">("right");
+
+
+
   const next = () => {
+    setDirection("right");
     const nextIndex = (currentIndex + 1) % sources.length;
-    // onClose();
-    // setTimeout(() => onClose(), 0); // force rerender (or lift index state to parent)
     openDialogWithIndex(nextIndex);
   };
 
   const prev = () => {
+    setDirection("left");
     const prevIndex = (currentIndex - 1 + sources.length) % sources.length;
-    // onClose();
-    // setTimeout(() => onClose(), 0);
-    openDialogWithIndex(prevIndex);
+    openDialogWithIndex(prevIndex)
+  }
+
+
+  const variants = {
+    enter: (direction: "left" | "right") => ({
+      x: direction === "right" ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: "left" | "right") => ({
+      x: direction === "right" ? -300 : 300,
+      opacity: 0,
+    }),
   };
 
   return (
     <>
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+      <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" sx={{ backdropFilter: "blur(5px)", }}>
         <DialogTitle
           sx={{
             bgcolor: "#f3f7f9",
@@ -62,14 +83,28 @@ export const SourceDialog = ({
             bgcolor: "#f3f7f9",
             minHeight: 200,
             position: "relative",
+            overflow: "hidden",
           }}
         >
-          <Typography variant="h6" color="#1e3799">
-            {source.source.split("\\").pop()} - Page {source.page}
-          </Typography>
-          <Typography variant="body1" mt={2}>
-            {source.content}
-          </Typography>
+          <AnimatePresence custom={direction} mode="wait">
+            <motion.div
+              key={source.source + source.page} // ensure unique key
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.2 }}
+              style={{ width: "100%" }}
+            >
+              <Typography variant="h6" color="#1e3799">
+                {source.source.split("\\").pop()} - Page {source.page}
+              </Typography>
+              <Typography variant="body1" mt={2}>
+                {source.content}
+              </Typography>
+            </motion.div>
+          </AnimatePresence>
         </DialogContent>
       </Dialog>
 

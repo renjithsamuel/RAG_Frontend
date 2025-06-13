@@ -32,7 +32,7 @@ export const IngestDialog = ({ open, onClose }: IngestDialogParams) => {
   });
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth sx={{    backdropFilter: "blur(4px)",}}>
       <DialogTitle>Upload Documents</DialogTitle>
       <DialogContent>
         <div {...getRootProps({ className: classes.dropzone })}>
