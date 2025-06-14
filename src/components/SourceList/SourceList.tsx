@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box, ButtonBase, Typography } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { SourceCard } from "./SourceCard";
 import { SourceDialog } from "./SourceDialog";
@@ -50,18 +50,34 @@ export const SourceList = ({ sources }: { sources: ISource[] }) => {
           ))}
         </AnimatePresence>
 
+        {/* collapse or show all */}
         {sources.length > 2 && (
           <motion.div
             layout
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.3 }}
-            whileHover={{ scale: 1.03 }}
+            transition={{ layout: { duration: 0.3, delay: showAll ? 0 : 0.4 } }}
+            whileHover={{ scale: 1.05 }}
           >
-            <Box className={classes.moreCard} onClick={handleMoreClick}>
+            <ButtonBase
+              onClick={handleMoreClick}
+              focusRipple
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                // backgroundColor: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                // boxShadow: "0 1px 4px rgba(0,0,0,0.08)",
+                border: "1px solid rgba(12, 36, 101, 0.2)",
+                cursor: "pointer",
+              }}
+            >
               {showAll ? <FaChevronUp /> : <MoreHorizIcon />}
-            </Box>
+            </ButtonBase>
           </motion.div>
         )}
       </Box>

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, ButtonBase, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { styled } from "@mui/system";
 import { FaPlus } from "react-icons/fa";
@@ -9,19 +9,17 @@ import { CreateCollectionDialog } from "../CreateCollectionDialog/CreateCollecti
 const GlassCard = styled(motion.div)(({ theme }) => ({
   background: "rgba(255, 255, 255, 0.15)",
   borderRadius: 20,
-  padding: 20,
   width: 200,
   height: 120,
   margin: 20,
-  // color: "#fff",
   backdropFilter: "blur(10px)",
   border: "1px solid rgba(255, 255, 255, 0.07)",
   boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-  cursor: "pointer",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  textAlign: "center",
+  position: "relative",
+  overflow: "hidden", // important for ripple clipping
 }));
 
 export const CollectionSelectorDialog = ({
@@ -92,7 +90,7 @@ export const CollectionSelectorDialog = ({
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h2" sx={{ mb: 4 }}>
+          <Typography variant="h2" sx={{ mb: 4, userSelect: "none" }}>
             Collections
           </Typography>
         </motion.div>
@@ -101,35 +99,41 @@ export const CollectionSelectorDialog = ({
           {collections.map((col, i) => (
             <GlassCard
               key={col.id}
-              whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, x: -100 * (i - 1) }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 * i }}
-              onClick={() => {
-                onSelect(col.id, col.name);
-                setVisible(false);
-              }}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              whileHover={{ scale: 1.05 }}
             >
-              <Typography variant="h6">{col.name}</Typography>
+              <ButtonBase
+                onClick={() => {
+                  onSelect(col.id, col.name);
+                  setVisible(false);
+                }}
+                sx={{
+                  position: "absolute",
+                  inset: 0, // stretch across the card
+                  borderRadius: 2,
+                }}
+                focusRipple
+              >
+                <Typography variant="h6" sx={{ zIndex: 1 }}>
+                  {col.name}
+                </Typography>
+              </ButtonBase>
             </GlassCard>
           ))}
+          {/* add button */}
           <GlassCard
             whileHover={{ scale: 1.05 }}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "2px dashed grey",
-              boxShadow: "none",
-            }}
-            onClick={handleCreateNew}
+            sx={{ border: "2px dashed grey", boxShadow: "none" }}
           >
-            <FaPlus size={30} />
+            <ButtonBase
+              onClick={handleCreateNew}
+              sx={{ position: "absolute", inset: 0, borderRadius: 2 }}
+              focusRipple
+            >
+              <FaPlus size={30} style={{ zIndex: 1 }} />
+            </ButtonBase>
           </GlassCard>
         </Box>
       </Box>

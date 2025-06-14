@@ -36,17 +36,6 @@ export const Home = () => {
 
   return (
     <Box className={classes.root}>
-      {/* collection switcher modal*/}
-      {(switchCollectionModalOpen || !collectionId || !collectionName) && (
-        <CollectionSelectorDialog
-          onSelect={(id, name) => {
-            setCollectionId(id);
-            setCollectionName(name);
-            setSwitchCollectionModalOpen(false);
-          }}
-        />
-      )}
-
       {/* chat messages */}
       <Box
         sx={{
@@ -66,7 +55,7 @@ export const Home = () => {
         <ChatInput onSend={handleSendMessage} />
       </Box>
 
-      {/* document manager */}
+      {/* document manager buttons */}
       <Box
         sx={{
           position: "fixed",
@@ -83,6 +72,7 @@ export const Home = () => {
         <CollectionSwitcherButton />
       </Box>
 
+      {/* modals */}
       {isDocumentManagerOpen && (
         <DocumentManagerModal
           open={isDocumentManagerOpen}
@@ -101,6 +91,17 @@ export const Home = () => {
           setTimeout(() => setIsDocumentManagerOpen(true), 200);
         }}
       />
+
+      {/* collection switcher modal*/}
+      {(switchCollectionModalOpen || !collectionId || !collectionName) && (
+        <CollectionSelectorDialog
+          onSelect={(id, name) => {
+            setCollectionId(id);
+            setCollectionName(name);
+            setSwitchCollectionModalOpen(false);
+          }}
+        />
+      )}
     </Box>
   );
 };

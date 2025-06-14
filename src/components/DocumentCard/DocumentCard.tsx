@@ -4,6 +4,7 @@ import { FaRegFilePdf } from "react-icons/fa6";
 import { CiTextAlignCenter, CiImageOn } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { themeValues } from "doc-bot/constants/ThemeConstants";
 
 interface Props {
   name: string;
@@ -35,7 +36,8 @@ export const DocumentCard = ({ name, onDeleteRequest }: Props) => {
           height: 60,
           borderRadius: 2,
           backgroundColor: "#f3f7f9",
-          boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+          // boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+          boxShadow: themeValues.shadow.boxShadowHeavy,
           m: 1.2,
           display: "flex",
           alignItems: "center",
@@ -55,6 +57,7 @@ export const DocumentCard = ({ name, onDeleteRequest }: Props) => {
             ml: 1,
             color: "#0c2465",
             fontWeight: 500,
+            userSelect: "none",
           }}
         >
           {name}

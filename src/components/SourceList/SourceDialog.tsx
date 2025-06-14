@@ -5,6 +5,7 @@ import {
   IconButton,
   Typography,
   Box,
+  ButtonBase,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -113,8 +114,9 @@ export const SourceDialog = ({
       {/* Floating Arrows */}
       {open && (
         <>
-          <Box
+          <ButtonBase
             onClick={prev}
+            focusRipple
             sx={{
               position: "fixed",
               top: "50%",
@@ -136,9 +138,10 @@ export const SourceDialog = ({
             }}
           >
             <ArrowBackIcon />
-          </Box>
+          </ButtonBase>
 
-          <Box
+          <ButtonBase
+            focusRipple
             onClick={next}
             sx={{
               position: "fixed",
@@ -161,7 +164,7 @@ export const SourceDialog = ({
             }}
           >
             <ArrowForwardIcon />
-          </Box>
+          </ButtonBase>
         </>
       )}
     </>

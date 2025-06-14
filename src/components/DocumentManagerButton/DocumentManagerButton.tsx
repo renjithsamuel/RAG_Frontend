@@ -8,7 +8,7 @@ import { DocumentManagerModal } from "../DocumentManagerModal/DocumentManagerMod
 export const DocumentManagerButton = ({ onClick }: { onClick: () => void }) => {
   const classes = useDocumentManagerButtonStyles();
   return (
-    <Tooltip title="Manage Documents">
+    <Tooltip title="Manage Context">
       <IconButton className={classes.iconButton} onClick={onClick}>
         <GrDocumentStore size={18} />
       </IconButton>

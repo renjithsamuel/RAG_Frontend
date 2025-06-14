@@ -7,6 +7,7 @@ import {
   Box,
   Typography,
   Tooltip,
+  ButtonBase,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa";
@@ -65,8 +66,8 @@ export const DocumentManagerModal = ({
         },
       }}
     >
-      <DialogTitle sx={{ textAlign: "start", pb: 0 }}>
-        <Typography variant="h4">Documents</Typography>
+      <DialogTitle sx={{ textAlign: "start", pb: 0, userSelect: "none" }}>
+        <Typography variant="h3">Manage Context</Typography>
 
         <IconButton
           onClick={onClose}
@@ -84,45 +85,51 @@ export const DocumentManagerModal = ({
       </DialogTitle>
 
       <DialogContent>
-        <Box
-          display="flex"
-          flexWrap="wrap"
-          justifyContent="start"
-          alignItems={"center"}
-          sx={{ gap: 2, mt: 2 }}
-        >
-          {documents.map((doc, i) => (
-            <DocumentCard
-              key={doc.id}
-              name={doc.name}
-              onDeleteRequest={() => {
-                setConfirmOpen(true);
-                setFileToDelete({ id: doc.id, name: doc.name });
-              }}
-            />
-          ))}
-
-          {/* Add Button */}
+        <Box sx={{ mt: 3, minHeight: 300 }}>
           <Box
-            component={motion.div}
-            whileHover={{ scale: 1.05 }}
-            sx={{
-              width: 150,
-              height: 60,
-              background: "#fff",
-              borderRadius: 3,
-              // boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              border: "2px dashed #b0b9c6",
+            display="grid"
+            gridTemplateColumns={{
+              xs: "repeat(3, 1fr)",
+              sm: "repeat(4, 1fr)",
+              md: "repeat(5, 1fr)",
             }}
-            onClick={onAdd}
+            gap={2}
+            justifyContent="center"
+            alignItems={"center"}
           >
-            <Tooltip title="Add Document" arrow>
-              <FaPlus size={20} color="#727D90" />
-            </Tooltip>
+            {documents.map((doc, i) => (
+              <DocumentCard
+                key={doc.id}
+                name={doc.name}
+                onDeleteRequest={() => {
+                  setConfirmOpen(true);
+                  setFileToDelete({ id: doc.id, name: doc.name });
+                }}
+              />
+            ))}
+
+            {/* Add Button */}
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <ButtonBase
+                onClick={onAdd}
+                focusRipple
+                sx={{
+                  width: 150,
+                  height: 60,
+                  background: "#fff",
+                  borderRadius: 2,
+                  border: "2px dashed #b0b9c6",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                }}
+              >
+                <Tooltip title="Add Document" arrow>
+                  <FaPlus size={18} color="#727D90" />
+                </Tooltip>
+              </ButtonBase>
+            </motion.div>
           </Box>
         </Box>
 

@@ -11,9 +11,9 @@ export const useCollectionSwitcherStyles = makeStyles(() => ({
     backgroundColor: "#fff",
     // backgroundColor: "blue",
     color: "#0c2465",
-    cursor: "pointer",
     marginLeft: "auto",
     height: 36,
+    userSelect: "none",
   },
   text: {
     paddingRight: themeValues.spacing(1),

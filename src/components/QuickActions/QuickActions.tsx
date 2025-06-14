@@ -5,6 +5,7 @@ import { useQuickActionsStyles } from "./QuickActions.styles";
 import { Merriweather } from "next/font/google";
 import clsx from "clsx";
 import { usePageContext } from "doc-bot/context/PageContext";
+import { themeValues } from "doc-bot/constants/ThemeConstants";
 
 interface QuickActionsParams {
   onActionClick: (action: string) => void;
@@ -43,6 +44,7 @@ export const QuickActions = ({ onActionClick }: QuickActionsParams) => {
       <Typography
         variant="h2"
         className={clsx(`${merriweather.variable}`, classes.title)}
+        sx={{userSelect: "none", }}
       >
         {"Say Goodbye to Manual Chaos"}
       </Typography>
@@ -52,12 +54,18 @@ export const QuickActions = ({ onActionClick }: QuickActionsParams) => {
             key={action}
             label={action}
             className={classes.actionButton}
-            style={{
+            sx={{
               backgroundColor: theme.palette.button.contrastText,
               color: theme.palette.button.main,
               fontWeight: 500,
               marginRight: theme.spacing(1.5),
               marginBottom: theme.spacing(1.5),
+              boxShadow:themeValues.shadow.boxShadowboxy,
+              transition: "background-color 0.3s, box-shadow 0.3s ease-in-out",
+              "&:hover": {
+                backgroundColor: theme.palette.button.dark,
+                boxShadow:themeValues.shadow.boxShadowHeavy,
+              },
             }}
             variant="filled"
             onClick={() => onActionClick(action)}
