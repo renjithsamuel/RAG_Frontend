@@ -1,4 +1,4 @@
-"use client"  
+"use client";
 import { Alert, Box } from "@mui/material";
 import { useBaseLayout } from "./BaseLayout.hooks";
 import { FC, ReactNode } from "react";
@@ -18,7 +18,6 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
   authenticatedOnly = true,
   children,
 }) => {
-  
   const {
     authenticated,
     isSuccess,

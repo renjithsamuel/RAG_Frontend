@@ -7,7 +7,6 @@ interface IngestButtonParams {
 }
 
 export const IngestButton = ({ onOpen }: IngestButtonParams) => {
-
   return (
     <IconButton
       onClick={onOpen}

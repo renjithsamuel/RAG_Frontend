@@ -27,7 +27,7 @@ const GlassCard = styled(motion.div)(({ theme }) => ({
 export const CollectionSelectorDialog = ({
   onSelect,
 }: {
-  onSelect: (id: string) => void;
+  onSelect: (id: string, name: string) => void;
 }) => {
   const [visible, setVisible] = useState(true);
   const [createOpen, setCreateOpen] = useState(false);
@@ -50,13 +50,14 @@ export const CollectionSelectorDialog = ({
     // setVisible(false);
   };
 
-  if (createOpen) return (
+  if (createOpen)
+    return (
       <CreateCollectionDialog
         open={createOpen}
         onClose={() => setCreateOpen(false)}
         onCreate={handleCreateConfirm}
       />
-  )
+    );
 
   if (!visible) return null;
 
@@ -105,7 +106,7 @@ export const CollectionSelectorDialog = ({
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 * i }}
               onClick={() => {
-                onSelect(col.id);
+                onSelect(col.id, col.name);
                 setVisible(false);
               }}
               sx={{
@@ -123,6 +124,8 @@ export const CollectionSelectorDialog = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              border: "2px dashed grey",
+              boxShadow: "none",
             }}
             onClick={handleCreateNew}
           >
@@ -130,7 +133,6 @@ export const CollectionSelectorDialog = ({
           </GlassCard>
         </Box>
       </Box>
-      
     </Box>
   );
 };

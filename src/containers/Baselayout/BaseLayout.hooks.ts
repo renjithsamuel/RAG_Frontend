@@ -105,7 +105,7 @@ export const useBaseLayout = ({
     ) {
       openAlertSnackbar(
         snackBarError?.ErrorMessage,
-        snackBarError?.ErrorSeverity
+        snackBarError?.ErrorSeverity,
       );
       setSnackBarError(undefined);
       setTimeout(() => {

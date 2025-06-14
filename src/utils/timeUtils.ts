@@ -1,4 +1,4 @@
-"use client"
+"use client";
 export class TimeUtil {
   public static getTimeDifference(time: Date | string): string {
     const timeInMillis = new Date(time).getTime();

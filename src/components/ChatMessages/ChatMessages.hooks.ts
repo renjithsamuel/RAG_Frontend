@@ -42,7 +42,5 @@ export const useChatMessages = ({
     });
   }, [messages]);
 
-
-
   return { formattedMessages };
 };

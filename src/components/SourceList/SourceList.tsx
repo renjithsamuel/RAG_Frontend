@@ -57,15 +57,14 @@ export const SourceList = ({ sources }: { sources: ISource[] }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3 }}
-            whileHover={{scale:1.03}}
+            whileHover={{ scale: 1.03 }}
           >
-            <Box className={classes.moreCard} onClick={handleMoreClick} >
+            <Box className={classes.moreCard} onClick={handleMoreClick}>
               {showAll ? <FaChevronUp /> : <MoreHorizIcon />}
             </Box>
           </motion.div>
         )}
       </Box>
-
 
       <SourceDialog
         openDialogWithIndex={openDialogWithIndex}

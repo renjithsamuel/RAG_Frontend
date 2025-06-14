@@ -1,7 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { themeValues } from "doc-bot/constants/ThemeConstants";
 
-
 export const useQuickActionsStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -24,7 +23,7 @@ export const useQuickActionsStyles = makeStyles((theme) => ({
     // backgroundColor: "red",
     width: "50%",
   },
-  actionsContainer: { 
+  actionsContainer: {
     gap: themeValues.spacing(1),
     // backgroundColor: "red",
     width: "60%",

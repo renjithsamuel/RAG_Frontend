@@ -6,7 +6,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles"; 
+import { makeStyles } from "@mui/styles";
 import React, { FC } from "react";
 
 export type AlertSnackbarProps = SnackbarProps;

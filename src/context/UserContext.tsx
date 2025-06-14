@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { User } from "doc-bot/entity/User/User";
 import {
   Dispatch,

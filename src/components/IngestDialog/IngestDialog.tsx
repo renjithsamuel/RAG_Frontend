@@ -10,6 +10,7 @@ import {
   ListItemText,
   IconButton,
   useTheme,
+  Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDropzone } from "react-dropzone";
@@ -32,8 +33,16 @@ export const IngestDialog = ({ open, onClose }: IngestDialogParams) => {
   });
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth sx={{    backdropFilter: "blur(4px)",}}>
-      <DialogTitle>Upload Documents</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      sx={{ backdropFilter: "blur(4px)" }}
+    >
+      <DialogTitle>
+        <Typography variant="h4"> Upload Documents</Typography>
+      </DialogTitle>
       <DialogContent>
         <div {...getRootProps({ className: classes.dropzone })}>
           <input {...getInputProps()} />
@@ -63,7 +72,7 @@ export const IngestDialog = ({ open, onClose }: IngestDialogParams) => {
           onClick={handleUpload}
           variant="contained"
           disabled={isUploading || files.length === 0}
-          sx={{ backgroundColor: theme.palette.button.main }}
+          sx={{ backgroundColor: "#0c2465" }}
         >
           {isUploading ? "Uploading..." : "Upload"}
         </Button>

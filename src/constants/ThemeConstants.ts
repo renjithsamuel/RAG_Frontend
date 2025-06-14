@@ -10,15 +10,15 @@ const lightThemeValues = {
   },
   color: {
     // Applied Materials Color Scheme
-    primaryBlue: "#0c2465",      // Main brand blue
-    secondaryBlue: "#1e3799",    // Darker blue
-    accentBlue: "#4a69bd",       // Interactive elements
-    backgroundGray: "#f8f9fa",   // Page background
-    contentBackground: "#ffffff",// Message/card backgrounds
-    textPrimary: "#2d3436",      // Main text
-    textSecondary: "#636e72",    // Secondary text
-    borderLight: "#dfe6e9",      // Borders and dividers
-    
+    primaryBlue: "#0c2465", // Main brand blue
+    secondaryBlue: "#1e3799", // Darker blue
+    accentBlue: "#4a69bd", // Interactive elements
+    backgroundGray: "#f8f9fa", // Page background
+    contentBackground: "#ffffff", // Message/card backgrounds
+    textPrimary: "#2d3436", // Main text
+    textSecondary: "#636e72", // Secondary text
+    borderLight: "#dfe6e9", // Borders and dividers
+
     // Chat Specific
     userMessageBackground: "#0c2465",
     userMessageText: "#ffffff",
@@ -39,7 +39,8 @@ const lightThemeValues = {
     boxShadowAttatched: "0 2px 4px 0 rgba(0, 0, 0, 0.06)",
     boxShadowboxy: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
   },
-  spacing: (...values: number[]) => values.map(value => `${value * 8}px`).join(' '),
+  spacing: (...values: number[]) =>
+    values.map((value) => `${value * 8}px`).join(" "),
   transition: {
     defaultTansition: "0.2s ease all",
   },

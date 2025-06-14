@@ -9,7 +9,7 @@ interface ChatInputHook {
 }
 
 export const useChatInput = (
-  onSend: (message: string) => void
+  onSend: (message: string) => void,
 ): ChatInputHook => {
   const [question, setQuestion] = useState("");
   const chatQuery = useChatQuery();
@@ -36,7 +36,10 @@ export const useChatInput = (
           // optional: show an error message
           setMessages((prev) => [
             ...prev,
-            { content: `Oops, something broke: ${err.message}`, isUser: false },
+            {
+              content: `**Oops, something broke**: ${err.message}`,
+              isUser: false,
+            },
           ]);
         },
       });

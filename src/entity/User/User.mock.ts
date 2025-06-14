@@ -17,7 +17,7 @@ export const mockUsers: User[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-  { 
+  {
     userID: "323456",
     name: "John Doe 3",
     email: "john.doe3@example.com",

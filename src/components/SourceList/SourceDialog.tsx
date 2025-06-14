@@ -13,7 +13,6 @@ import { ISource } from "doc-bot/entity/Content/Chat";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-
 export const SourceDialog = ({
   open,
   onClose,
@@ -31,8 +30,6 @@ export const SourceDialog = ({
 
   const [direction, setDirection] = useState<"left" | "right">("right");
 
-
-
   const next = () => {
     setDirection("right");
     const nextIndex = (currentIndex + 1) % sources.length;
@@ -42,9 +39,8 @@ export const SourceDialog = ({
   const prev = () => {
     setDirection("left");
     const prevIndex = (currentIndex - 1 + sources.length) % sources.length;
-    openDialogWithIndex(prevIndex)
-  }
-
+    openDialogWithIndex(prevIndex);
+  };
 
   const variants = {
     enter: (direction: "left" | "right") => ({
@@ -63,7 +59,13 @@ export const SourceDialog = ({
 
   return (
     <>
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" sx={{ backdropFilter: "blur(5px)", }}>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        fullWidth
+        maxWidth="sm"
+        sx={{ backdropFilter: "blur(5px)" }}
+      >
         <DialogTitle
           sx={{
             bgcolor: "#f3f7f9",
@@ -97,7 +99,7 @@ export const SourceDialog = ({
               transition={{ duration: 0.2 }}
               style={{ width: "100%" }}
             >
-              <Typography variant="h6" color="#1e3799">
+              <Typography variant="h6">
                 {source.source.split("\\").pop()} - Page {source.page}
               </Typography>
               <Typography variant="body1" mt={2}>

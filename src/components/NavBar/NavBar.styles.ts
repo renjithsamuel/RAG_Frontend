@@ -10,7 +10,7 @@ export const useNavBarStyles = makeStyles((theme) => ({
     width: theme.spacing(35),
     backgroundColor: theme.palette.background.paper,
     boxShadow: "rgba(149, 157, 165, 0) 0px 8px 24px !important",
-    borderRight: `1px solid transparent !important`, 
+    borderRight: `1px solid transparent !important`,
   },
   toolbar: {
     display: "flex",

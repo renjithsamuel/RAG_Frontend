@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { AlertType } from "doc-bot/types/AlertType";
 import { JSX } from "@emotion/react/jsx-runtime";
 import {
@@ -26,6 +26,16 @@ type TPageContext = {
   setNavBarOpen: Dispatch<SetStateAction<boolean>>;
   messages: any[];
   setMessages: Dispatch<SetStateAction<any[]>>;
+  collectionId: string;
+  collectionName: string;
+  setCollectionId: Dispatch<SetStateAction<string>>;
+  setCollectionName: Dispatch<SetStateAction<string>>;
+  switchCollectionModalOpen: boolean;
+  setSwitchCollectionModalOpen: Dispatch<SetStateAction<boolean>>;
+  isDocumentManagerOpen: boolean;
+  setIsDocumentManagerOpen: Dispatch<SetStateAction<boolean>>;
+  isIngestOpen: boolean;
+  setIsIngestOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export const PageContext = createContext<TPageContext>(
@@ -48,6 +58,12 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
   const [openSavedDialog, setOpenSavedDialog] = useState(false);
   const [navBarOpen, setNavBarOpen] = useState(true);
   const [messages, setMessages] = useState<any[]>([]);
+  const [collectionId, setCollectionId] = useState<string>("");
+  const [collectionName, setCollectionName] = useState<string>("");
+  const [switchCollectionModalOpen, setSwitchCollectionModalOpen] =
+    useState<boolean>(true);
+  const [isDocumentManagerOpen, setIsDocumentManagerOpen] = useState(false);
+  const [isIngestOpen, setIsIngestOpen] = useState(false);
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => !prev);
@@ -62,7 +78,7 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
         setSnackBarError,
         DialogBox,
         setDialogBox,
-        isDarkMode, 
+        isDarkMode,
         toggleTheme,
         openSavedDialog,
         setOpenSavedDialog,
@@ -70,6 +86,16 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
         setNavBarOpen,
         messages,
         setMessages,
+        collectionId,
+        collectionName,
+        setCollectionId,
+        setCollectionName,
+        switchCollectionModalOpen,
+        setSwitchCollectionModalOpen,
+        isDocumentManagerOpen,
+        setIsDocumentManagerOpen,
+        isIngestOpen,
+        setIsIngestOpen,
       }}
     >
       {children}

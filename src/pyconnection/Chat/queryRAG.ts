@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient, UseQueryResult } from "react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from "react-query";
 import { QueryKeys } from "doc-bot/constants/Querykeys";
 import { PublicAxios } from "..";
 
@@ -24,9 +29,12 @@ export const queryRAG = async ({
 }: {
   query: string;
 }): Promise<QueryRAGResponse> => {
-  const response = await PublicAxios.post<QueryRAGAPIResponse>("/api/v1/query", {
-    question: query
-  });
+  const response = await PublicAxios.post<QueryRAGAPIResponse>(
+    "/api/v1/query",
+    {
+      question: query,
+    },
+  );
 
   return {
     answer: response.data.answer,
@@ -45,6 +53,6 @@ export const useChatQuery = () => {
         console.log("AI answer:", data.answer);
         // you can even invalidate or refetch other queries here if needed
       },
-    }
+    },
   );
 };

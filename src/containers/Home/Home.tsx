@@ -11,27 +11,43 @@ import { themeValues } from "doc-bot/constants/ThemeConstants";
 import { QuickActions } from "doc-bot/components/QuickActions/QuickActions";
 import { useState } from "react";
 import { CollectionSelectorDialog } from "doc-bot/components/CollectionSelectorDialog/CollectionSelectorDialog";
+import { CollectionSwitcherButton } from "doc-bot/components/CollectionSwitcherButton/CollectionSwitcherButton";
+import { DocumentManagerButton } from "doc-bot/components/DocumentManagerButton/DocumentManagerButton";
+import { DocumentManagerModal } from "doc-bot/components/DocumentManagerModal/DocumentManagerModal";
 
 export const Home = () => {
   const classes = useHomeStyles();
-  const [collectionId, setCollectionId] = useState<string | null>(null);
+
+  const { messages, handleSendMessage, handleQuickAction } = useHome();
+
   const {
-    messages,
-    handleSendMessage,
+    navBarOpen,
+    setCollectionId,
+    switchCollectionModalOpen,
+    collectionId,
+    collectionName,
+    setCollectionName,
+    setSwitchCollectionModalOpen,
+    isDocumentManagerOpen,
+    setIsDocumentManagerOpen,
     isIngestOpen,
-    handleIngestOpen,
-    handleIngestClose,
-    handleQuickAction,
-  } = useHome();
-
-  const { navBarOpen } = usePageContext();
-
+    setIsIngestOpen,
+  } = usePageContext();
 
   return (
     <Box className={classes.root}>
-      {!collectionId && <CollectionSelectorDialog onSelect={(id) => setCollectionId(id)} />}
-      <IngestButton onOpen={handleIngestOpen} />
-      <IngestDialog open={isIngestOpen} onClose={handleIngestClose} />
+      {/* collection switcher modal*/}
+      {(switchCollectionModalOpen || !collectionId || !collectionName) && (
+        <CollectionSelectorDialog
+          onSelect={(id, name) => {
+            setCollectionId(id);
+            setCollectionName(name);
+            setSwitchCollectionModalOpen(false);
+          }}
+        />
+      )}
+
+      {/* chat messages */}
       <Box
         sx={{
           display: "flex",
@@ -49,6 +65,42 @@ export const Home = () => {
         )}
         <ChatInput onSend={handleSendMessage} />
       </Box>
+
+      {/* document manager */}
+      <Box
+        sx={{
+          position: "fixed",
+          top: themeValues.spacing(2),
+          right: themeValues.spacing(2),
+          display: "flex",
+          alignItems: "center",
+          gap: themeValues.spacing(2),
+          zIndex: 1300,
+          // backgroundColor:'red'
+        }}
+      >
+        <DocumentManagerButton onClick={() => setIsDocumentManagerOpen(true)} />
+        <CollectionSwitcherButton />
+      </Box>
+
+      {isDocumentManagerOpen && (
+        <DocumentManagerModal
+          open={isDocumentManagerOpen}
+          onClose={() => setIsDocumentManagerOpen(false)}
+          onAdd={() => {
+            setIsDocumentManagerOpen(false);
+            setTimeout(() => setIsIngestOpen(true), 200); // delay for animation
+          }}
+        />
+      )}
+
+      <IngestDialog
+        open={isIngestOpen}
+        onClose={() => {
+          setIsIngestOpen(false);
+          setTimeout(() => setIsDocumentManagerOpen(true), 200);
+        }}
+      />
     </Box>
   );
 };

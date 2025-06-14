@@ -4,7 +4,7 @@ import { themeValues } from "doc-bot/constants/ThemeConstants";
 export const useChatInputStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
-    bottom:` ${theme.spacing(2)} !important`,
+    bottom: ` ${theme.spacing(2)} !important`,
     color: `${theme.palette.text.primary} !important`,
     margin: theme.spacing(3),
     padding: theme.spacing(1.5),

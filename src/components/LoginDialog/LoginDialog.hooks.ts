@@ -15,20 +15,17 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [openDialog, setOpenDialog] = useState<boolean>(true);
 
-
   // const {
   //   mutateAsync: loginUser,
   //   isLoading: isLoginError,
   //   isSuccess: isLoginSuccess,
   // } = useLoginUserAPI();
 
-
   const { setSnackBarError } = usePageContext();
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
-  }
-
+  };
 
   // useEffect(() => {
   //   if (isLoginSuccess) {
@@ -39,7 +36,6 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
   //     });
   //   }
   // }, [isLoginSuccess]);
-
 
   return {
     fullScreen,

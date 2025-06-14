@@ -105,7 +105,7 @@ export const lightTheme = responsiveFontSizes(
       ...baseThemeOptions.palette,
       mode: "light",
     },
-  })
+  }),
 );
 
 export const darkTheme = responsiveFontSizes(
@@ -123,5 +123,5 @@ export const darkTheme = responsiveFontSizes(
         secondary: "#e0e0e0",
       },
     },
-  })
+  }),
 );

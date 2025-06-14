@@ -29,7 +29,10 @@ export const QuickActions = ({ onActionClick }: QuickActionsParams) => {
   ];
 
   return (
-    <Box className={classes.container} sx={{ marginLeft: navBarOpen ? theme.spacing(20) : theme.spacing(60) }}>
+    <Box
+      className={classes.container}
+      sx={{ marginLeft: navBarOpen ? theme.spacing(20) : theme.spacing(60) }}
+    >
       <Image
         src="/applied-logo.svg"
         alt="Applied Materials"

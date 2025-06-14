@@ -4,15 +4,11 @@ import { useState } from "react";
 interface HomeHook {
   messages: any[];
   handleSendMessage: (message: string) => void;
-  isIngestOpen: boolean;
-  handleIngestOpen: () => void;
-  handleIngestClose: () => void;
   handleQuickAction: (action: QuickActionKey) => void;
 }
 
 export const useHome = (): HomeHook => {
   const { messages, setMessages } = usePageContext();
-  const [isIngestOpen, setIsIngestOpen] = useState(false);
 
   const handleSendMessage = (message: string) => {
     // Add user message
@@ -91,9 +87,6 @@ export const useHome = (): HomeHook => {
   return {
     messages,
     handleSendMessage,
-    isIngestOpen,
-    handleIngestOpen: () => setIsIngestOpen(true),
-    handleIngestClose: () => setIsIngestOpen(false),
     handleQuickAction,
   };
 };

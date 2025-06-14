@@ -33,7 +33,7 @@ export const SourceCard = ({
       }}
     >
       <Typography variant="subtitle2" fontWeight={600}>
-        {truncate(data.source.split("\\").pop() || '', 15)} 
+        {truncate(data.source.split("\\").pop() || "", 15)}
         {/* - Page {data.page} */}
       </Typography>
       <Typography variant="caption" mt={1}>

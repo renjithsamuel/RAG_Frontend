@@ -1,6 +1,6 @@
-import '@mui/styles/defaultTheme';
-import { Theme } from '@mui/material/styles';
+import "@mui/styles/defaultTheme";
+import { Theme } from "@mui/material/styles";
 
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   interface DefaultTheme extends Theme {}
 }

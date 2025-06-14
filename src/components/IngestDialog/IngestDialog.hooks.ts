@@ -7,7 +7,7 @@ interface IngestDialogHook {
   files: File[];
   handleUpload: () => Promise<void>;
   handleRemove: (file: File) => void;
-  onDrop: (acceptedFiles: File[]) => void
+  onDrop: (acceptedFiles: File[]) => void;
   isUploading: boolean;
 }
 
@@ -16,9 +16,8 @@ export const useIngestDialog = (onClose: () => void): IngestDialogHook => {
   const { setSnackBarError } = usePageContext();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFiles(prev => [...prev, ...acceptedFiles]);
+    setFiles((prev) => [...prev, ...acceptedFiles]);
   }, []);
-
 
   const uploadMutation = useMutation((file: File) => {
     const formData = new FormData();
@@ -28,7 +27,7 @@ export const useIngestDialog = (onClose: () => void): IngestDialogHook => {
 
   const handleUpload = async () => {
     try {
-      await Promise.all(files.map(file => uploadMutation.mutateAsync(file)));
+      await Promise.all(files.map((file) => uploadMutation.mutateAsync(file)));
       setSnackBarError({
         ErrorMessage: "Files uploaded successfully",
         ErrorSeverity: "success",
@@ -46,7 +45,7 @@ export const useIngestDialog = (onClose: () => void): IngestDialogHook => {
   };
 
   const handleRemove = (file: File) => {
-    setFiles(files.filter(f => f !== file));
+    setFiles(files.filter((f) => f !== file));
   };
 
   return {
