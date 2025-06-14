@@ -46,7 +46,7 @@ export default function RootLayout({
           <CssBaseline />
           <GlobalStyles
             styles={{
-              body: { backgroundColor: "#dacfff" },
+              body: { backgroundColor: "#f3f7f9" },
               a: { color: "#0071ff" },
             }}
           />
