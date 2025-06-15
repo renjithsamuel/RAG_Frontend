@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { usePageContext } from "doc-bot/context/PageContext";
+import { useUploadDocument } from "doc-bot/pyconnection/Document/UploadDocument";
 
 interface IngestDialogHook {
   files: File[];
@@ -13,21 +14,19 @@ interface IngestDialogHook {
 
 export const useIngestDialog = (onClose: () => void): IngestDialogHook => {
   const [files, setFiles] = useState<File[]>([]);
-  const { setSnackBarError } = usePageContext();
+  const { setSnackBarError, collectionId } = usePageContext();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles((prev) => [...prev, ...acceptedFiles]);
   }, []);
 
-  const uploadMutation = useMutation((file: File) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    return axios.post("/api/ingest", formData);
-  });
+  const uploadDocument = useUploadDocument();
 
   const handleUpload = async () => {
     try {
-      await Promise.all(files.map((file) => uploadMutation.mutateAsync(file)));
+      for (const file of files) {
+        await uploadDocument.mutateAsync({ collectionId, file });
+      }
       setSnackBarError({
         ErrorMessage: "Files uploaded successfully",
         ErrorSeverity: "success",
@@ -35,12 +34,11 @@ export const useIngestDialog = (onClose: () => void): IngestDialogHook => {
       setFiles([]);
       onClose();
     } catch (err) {
+      console.error("Upload failed:", err);
       setSnackBarError({
         ErrorMessage: "Error uploading files",
         ErrorSeverity: "error",
       });
-
-      console.error("Error uploading files:", err);
     }
   };
 
@@ -53,6 +51,6 @@ export const useIngestDialog = (onClose: () => void): IngestDialogHook => {
     handleUpload,
     handleRemove,
     onDrop,
-    isUploading: uploadMutation.isLoading,
+    isUploading: uploadDocument.isLoading,
   };
 };

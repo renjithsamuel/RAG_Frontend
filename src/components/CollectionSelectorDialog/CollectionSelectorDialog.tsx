@@ -1,10 +1,15 @@
 "use client";
-import { useState } from "react";
-import { Box, ButtonBase, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, ButtonBase, CircularProgress, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { styled } from "@mui/system";
 import { FaPlus } from "react-icons/fa";
 import { CreateCollectionDialog } from "../CreateCollectionDialog/CreateCollectionDialog";
+import {
+  useCollections,
+  useCreateCollection,
+} from "doc-bot/pyconnection/Collection/CreateCollection";
+import { usePageContext } from "doc-bot/context/PageContext";
 
 const GlassCard = styled(motion.div)(({ theme }) => ({
   background: "rgba(255, 255, 255, 0.15)",
@@ -30,22 +35,44 @@ export const CollectionSelectorDialog = ({
   const [visible, setVisible] = useState(true);
   const [createOpen, setCreateOpen] = useState(false);
 
-  const [collections, setCollections] = useState([
-    { id: "1", name: "E3" },
-    { id: "2", name: "Dashboard" },
-    { id: "3", name: "Analytics" },
-  ]);
+  const { setSnackBarError } = usePageContext();
+  const { data: collections = [], isLoading, isError } = useCollections();
+  const createCollection = useCreateCollection();
+
+  useEffect(() => {
+    if (isError) {
+      setSnackBarError({
+        ErrorMessage: "Failed to load collections",
+        ErrorSeverity: "error",
+      });
+    }
+  }, [isError]);
 
   // Handle create new
   const handleCreateNew = () => setCreateOpen(true);
 
-  const handleCreateConfirm = (name: string) => {
-    const newColId = Date.now().toString();
-    const newCollection = { id: newColId, name };
-    setCollections((prev) => [...prev, newCollection]);
-    setCreateOpen(false);
-    // onSelect(newColId);
-    // setVisible(false);
+  const handleCreateConfirm = async (name: string) => {
+    try {
+      let newCol = null;
+      try {
+        newCol = await createCollection.mutateAsync(name);
+        setSnackBarError({
+          ErrorMessage: "Collection created successfully",
+          ErrorSeverity: "success",
+        });
+      } catch (error) {
+        setSnackBarError({
+          ErrorMessage: "Error uploading files",
+          ErrorSeverity: "error",
+        });
+        throw error;
+      }
+      setCreateOpen(false);
+      onSelect(newCol.id, newCol.name);
+      setVisible(false);
+    } catch (err) {
+      console.error("Create collection failed", err);
+    }
   };
 
   if (createOpen)
@@ -95,47 +122,51 @@ export const CollectionSelectorDialog = ({
           </Typography>
         </motion.div>
 
-        <Box display="flex" flexWrap="wrap" justifyContent="center">
-          {collections.map((col, i) => (
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Box display="flex" flexWrap="wrap" justifyContent="center">
+            {collections.map((col, i) => (
+              <GlassCard
+                key={col.id}
+                initial={{ opacity: 0, x: -100 * (i - 1) }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * i }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <ButtonBase
+                  onClick={() => {
+                    onSelect(col.id, col.name);
+                    setVisible(false);
+                  }}
+                  sx={{
+                    position: "absolute",
+                    inset: 0, // stretch across the card
+                    borderRadius: 2,
+                  }}
+                  focusRipple
+                >
+                  <Typography variant="h6" sx={{ zIndex: 1 }}>
+                    {col.name}
+                  </Typography>
+                </ButtonBase>
+              </GlassCard>
+            ))}
+            {/* add button */}
             <GlassCard
-              key={col.id}
-              initial={{ opacity: 0, x: -100 * (i - 1) }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 * i }}
               whileHover={{ scale: 1.05 }}
+              sx={{ border: "2px dashed grey", boxShadow: "none" }}
             >
               <ButtonBase
-                onClick={() => {
-                  onSelect(col.id, col.name);
-                  setVisible(false);
-                }}
-                sx={{
-                  position: "absolute",
-                  inset: 0, // stretch across the card
-                  borderRadius: 2,
-                }}
+                onClick={handleCreateNew}
+                sx={{ position: "absolute", inset: 0, borderRadius: 2 }}
                 focusRipple
               >
-                <Typography variant="h6" sx={{ zIndex: 1 }}>
-                  {col.name}
-                </Typography>
+                <FaPlus size={30} style={{ zIndex: 1 }} />
               </ButtonBase>
             </GlassCard>
-          ))}
-          {/* add button */}
-          <GlassCard
-            whileHover={{ scale: 1.05 }}
-            sx={{ border: "2px dashed grey", boxShadow: "none" }}
-          >
-            <ButtonBase
-              onClick={handleCreateNew}
-              sx={{ position: "absolute", inset: 0, borderRadius: 2 }}
-              focusRipple
-            >
-              <FaPlus size={30} style={{ zIndex: 1 }} />
-            </ButtonBase>
-          </GlassCard>
-        </Box>
+          </Box>
+        )}
       </Box>
     </Box>
   );
