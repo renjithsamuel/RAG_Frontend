@@ -13,27 +13,6 @@ export const useHome = (): HomeHook => {
   const handleSendMessage = (message: string) => {
     // Add user message
     setMessages((prev) => [...prev, { content: message, isUser: true }]);
-    // // Add temporary bot response after 1 second
-    // setTimeout(() => {
-    //   setMessages((prev) => [
-    //     ...prev,
-    //     {
-    //       content: `
-    // **🤖 Doc Bot:**
-    // # Thank you for reaching out!
-    // ### Your message has been received and is important to us.
-
-    // **Here's what you can do next:**
-    // - Ask me anything about your documents or data.
-    // - Use **keywords** or **phrases** for more accurate answers.
-    // - If you need help, just type \`help\`.
-
-    // _I'm here to assist you with all your document-related queries!_
-    // `,
-    //       isUser: false,
-    //     },
-    //   ]);
-    // }, 1000);
   };
 
   const handleQuickAction = (action: QuickActionKey) => {

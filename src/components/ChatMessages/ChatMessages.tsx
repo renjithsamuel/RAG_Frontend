@@ -10,6 +10,7 @@ import { useEffect, useRef } from "react";
 import { ISource } from "doc-bot/entity/Content/Chat";
 import { SourceList } from "../SourceList/SourceList";
 import rehypeRaw from "rehype-raw";
+import Skeleton from "@mui/material/Skeleton";
 
 interface ChatMessagesParams {
   messages: Array<{
@@ -26,6 +27,7 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
       content: string;
       isUser: boolean;
       sources?: ISource[];
+      isLoading?: boolean;
     }>;
   };
 
@@ -48,33 +50,67 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
             message.isUser ? classes.userMessage : classes.botMessage
           }`}
         >
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            components={{
-              code({ className, children, ...restProps }) {
-                const match = /language-(\w+)/.exec(className || "");
-                const { ref, ...propsForSH } = restProps as any;
-                return match ? (
-                  <SyntaxHighlighter
-                    style={codeTheme}
-                    language={match[1]}
-                    PreTag="div"
-                    {...propsForSH}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code className={className} {...propsForSH}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-          >
-            {message.content}
-          </ReactMarkdown>
-          {!message.isUser && message.sources && (
+          {message.isLoading ? (
+            <>
+              <Skeleton
+                variant="text"
+                width="25vw"
+                height={24}
+                animation="wave"
+                sx={{ mb: 1 }}
+              />
+              <Skeleton
+                variant="text"
+                width="110%"
+                height={24}
+                animation="wave"
+                sx={{ mb: 1 }}
+              />
+              <Skeleton
+                variant="text"
+                width="70%"
+                height={24}
+                animation="wave"
+                sx={{ mb: 1 }}
+              />
+              <Skeleton
+                variant="text"
+                width="80%"
+                height={24}
+                animation="wave"
+              />
+            </>
+          ) : (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={{
+                code({ className, children, ...restProps }) {
+                  const match = /language-(\w+)/.exec(className || "");
+                  const { ref, ...propsForSH } = restProps as any;
+                  return match ? (
+                    <SyntaxHighlighter
+                      style={codeTheme}
+                      language={match[1]}
+                      PreTag="div"
+                      {...propsForSH}
+                    >
+                      {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code className={className} {...propsForSH}>
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+            >
+              {message.content}
+            </ReactMarkdown>
+          )}
+
+          {/* Sources if available */}
+          {!message.isUser && !message.isLoading && message.sources && (
             <>
               <Divider sx={{ my: 2 }} />
               <SourceList sources={message.sources} />

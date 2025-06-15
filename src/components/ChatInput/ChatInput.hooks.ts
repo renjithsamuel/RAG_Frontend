@@ -24,23 +24,44 @@ export const useChatInput = (
       // add user message
       onSend(question);
 
+      const loadingId = Date.now();
+
+      setMessages((prev) => [
+        ...prev,
+        { content: "", isUser: false, isLoading: true, id: loadingId },
+      ]);
+
       // Add bot message
       chatQuery.mutate(question, {
         onSuccess: (data) => {
-          setMessages((prev) => [
-            ...prev,
-            { content: data.answer, isUser: false },
-          ]);
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === loadingId
+                ? {
+                    content: data.answer,
+                    isUser: false,
+                    sources: data.sources,
+                    isLoading: false,
+                    id: loadingId,
+                  }
+                : msg,
+            ),
+          );
         },
         onError: (err) => {
           // optional: show an error message
-          setMessages((prev) => [
-            ...prev,
-            {
-              content: `**Oops, something broke**: ${err.message}`,
-              isUser: false,
-            },
-          ]);
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === loadingId
+                ? {
+                    content: `**Oops, something went wrong**: ${err.message}`,
+                    isUser: false,
+                    isLoading: false,
+                    id: loadingId,
+                  }
+                : msg,
+            ),
+          );
         },
       });
 

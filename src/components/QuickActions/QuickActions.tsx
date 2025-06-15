@@ -44,7 +44,7 @@ export const QuickActions = ({ onActionClick }: QuickActionsParams) => {
       <Typography
         variant="h2"
         className={clsx(`${merriweather.variable}`, classes.title)}
-        sx={{userSelect: "none", }}
+        sx={{ userSelect: "none" }}
       >
         {"Say Goodbye to Manual Chaos"}
       </Typography>
@@ -60,11 +60,11 @@ export const QuickActions = ({ onActionClick }: QuickActionsParams) => {
               fontWeight: 500,
               marginRight: theme.spacing(1.5),
               marginBottom: theme.spacing(1.5),
-              boxShadow:themeValues.shadow.boxShadowboxy,
+              boxShadow: themeValues.shadow.boxShadowboxy,
               transition: "background-color 0.3s, box-shadow 0.3s ease-in-out",
               "&:hover": {
                 backgroundColor: theme.palette.button.dark,
-                boxShadow:themeValues.shadow.boxShadowHeavy,
+                boxShadow: themeValues.shadow.boxShadowHeavy,
               },
             }}
             variant="filled"

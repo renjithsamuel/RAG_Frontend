@@ -6,17 +6,17 @@ export const useSourceList = (sources: ISource[]) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [visibleSources, setVisibleSources] = useState<ISource[]>(
-    sources.slice(0, 2)
+    sources.slice(0, 2),
   );
 
   const openDialogWithIndex = (index: number) => {
     setSelectedIndex(index);
     setDialogOpen(true);
   };
-  
+
   const closeDialog = () => setDialogOpen(false);
 
-    const handleMoreClick = () => {
+  const handleMoreClick = () => {
     if (showAll) {
       // First, animate card exit
       setVisibleSources(sources.slice(0, 2));
