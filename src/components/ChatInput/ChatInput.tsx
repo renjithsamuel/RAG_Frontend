@@ -66,7 +66,8 @@ export const ChatInput = ({ onSend }: ChatInputParams) => {
             display: "flex",
             alignItems: "center",
             gap: theme.spacing(0.5),
-            backgroundColor: theme.palette.button.main,
+            // backgroundColor: theme.palette.button.main,
+            backgroundColor: "#347da2",
           }}
         >
           Send

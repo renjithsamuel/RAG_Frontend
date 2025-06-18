@@ -58,7 +58,7 @@ export default function RootLayout({
               >
                 <PageContextProvider>
                   <UserContextProvider>
-                    <ReactQueryDevtools />
+                    {/* <ReactQueryDevtools /> */}
                     <BaseLayout authenticatedOnly={false}>
                       {children}
                     </BaseLayout>

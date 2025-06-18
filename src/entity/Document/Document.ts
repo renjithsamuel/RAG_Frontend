@@ -1,14 +1,14 @@
 export interface IDocument {
   id: string;
-  name: string;
+  filename: string;
 }
 
 export class DocumentModel implements IDocument {
   readonly id: string;
-  readonly name: string;
+  readonly filename: string;
 
   constructor(data: IDocument) {
     this.id = data.id;
-    this.name = data.name;
+    this.filename = data.filename;
   }
 }

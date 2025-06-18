@@ -8,7 +8,7 @@ export const useDeleteDocument = (collectionId: string) => {
   return useMutation(
     async (docId: string) => {
       await PublicAxios.delete(
-        `/api/collections/${collectionId}/documents/${docId}`
+        `/collections/${collectionId}/documents/${docId}`
       );
     },
     {

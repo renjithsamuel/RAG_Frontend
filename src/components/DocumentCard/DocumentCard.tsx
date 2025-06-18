@@ -5,6 +5,7 @@ import { CiTextAlignCenter, CiImageOn } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { themeValues } from "doc-bot/constants/ThemeConstants";
+import { FaRegFileLines } from "react-icons/fa6";
 
 interface Props {
   name: string;
@@ -14,12 +15,16 @@ interface Props {
 export const DocumentCard = ({ name, onDeleteRequest }: Props) => {
   const [hovered, setHovered] = useState(false);
 
-  const ext = name.split(".").pop()?.toLowerCase();
 
-  let icon = <CiTextAlignCenter size={24} />;
+  const ext = name.split(".").pop()?.toLowerCase();
+  
+  let icon = <FaRegFileLines size={24}/>;
   if (ext === "pdf") icon = <FaRegFilePdf size={24} color="#D33D3D" />;
   else if (["png", "jpg", "jpeg", "webp", "gif"].includes(ext || ""))
     icon = <CiImageOn size={24} />;
+  // else if (["txt", "md", "docx"].includes(ext || ""))
+  //   icon = <CiTextAlignCenter size={24} />;
+
 
   return (
     <AnimatePresence>
@@ -32,7 +37,7 @@ export const DocumentCard = ({ name, onDeleteRequest }: Props) => {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
         sx={{
-          width: 150,
+          width: 250,
           height: 60,
           borderRadius: 2,
           backgroundColor: "#f3f7f9",

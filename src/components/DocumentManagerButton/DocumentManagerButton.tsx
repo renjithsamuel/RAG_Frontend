@@ -10,7 +10,7 @@ export const DocumentManagerButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <Tooltip title="Manage Context">
       <IconButton className={classes.iconButton} onClick={onClick}>
-        <GrDocumentStore size={18} />
+        <GrDocumentStore size={18}/>
       </IconButton>
     </Tooltip>
   );

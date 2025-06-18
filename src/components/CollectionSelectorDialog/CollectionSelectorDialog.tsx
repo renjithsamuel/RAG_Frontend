@@ -37,6 +37,15 @@ export const CollectionSelectorDialog = ({
 
   const { setSnackBarError } = usePageContext();
   const { data: collections = [], isLoading, isError } = useCollections();
+  // collection mock
+  // let isLoading = false
+  // let isError = false
+  // let collections = [
+  //   { name: "Collection 1", id: "1" },
+  //   { name: "Collection 2", id: "2" },
+  //   { name: "Collection 3", id: "3" }
+  // ]
+
   const createCollection = useCreateCollection();
 
   useEffect(() => {
@@ -68,8 +77,8 @@ export const CollectionSelectorDialog = ({
         throw error;
       }
       setCreateOpen(false);
-      onSelect(newCol.id, newCol.name);
-      setVisible(false);
+      // onSelect(newCol.id, newCol.name);
+      // setVisible(false);
     } catch (err) {
       console.error("Create collection failed", err);
     }

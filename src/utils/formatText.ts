@@ -55,4 +55,13 @@ export class FormatTextUtil {
     }
     return dayjs(date).format("D MMMM, YYYY").toString();
   };
+  
+  public static removeExtraDots = (text: string): string => {
+    if (typeof text !== "string") {
+      return text;
+    }
+    // Replace sequences of 4 or more dots (with optional spaces between) with empty string
+    return text.replace(/(\.\s*){4,}/g, "");
+  };
 }
+

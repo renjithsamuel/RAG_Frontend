@@ -7,7 +7,7 @@ export const useCollectionSwitcherStyles = makeStyles(() => ({
     alignItems: "center",
     padding: "6px 12px",
     borderRadius: "999px", // capsule
-    boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.53)",
     backgroundColor: "#fff",
     // backgroundColor: "blue",
     color: "#0c2465",

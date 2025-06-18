@@ -6,8 +6,8 @@ import { ICollection } from "doc-bot/entity/Collection/Collection";
 // Fetch collections
 export const useCollections = () =>
   useQuery<ICollection[]>(QueryKeys.CREATE_COLLECTIONS, async () => {
-    const res = await PublicAxios.get("/api/collections");
-    return res.data;
+    const res = await PublicAxios.get("/collections");
+    return res.data.collections;
   });
 
 // Create collection
@@ -16,7 +16,7 @@ export const useCreateCollection = () => {
 
   return useMutation(
     async (name: string) => {
-      const res = await PublicAxios.post<ICollection>("/api/collections", { name });
+      const res = await PublicAxios.post<ICollection>("/collections", { name });
       return res.data;
     },
     {

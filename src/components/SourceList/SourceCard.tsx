@@ -1,5 +1,7 @@
 import { Box, ButtonBase, Typography } from "@mui/material";
+import { themeValues } from "doc-bot/constants/ThemeConstants";
 import { ISource } from "doc-bot/entity/Content/Chat";
+import { FormatTextUtil } from "doc-bot/utils/formatText";
 import { motion } from "framer-motion";
 
 const truncate = (text: string, limit = 15) =>
@@ -23,8 +25,8 @@ export const SourceCard = ({
           background: "rgba(243, 247, 249, 0.95)",
           border: "1px solid rgba(12, 36, 101, 0.2)",
           borderRadius: 2,
-          width: 180,
-          height: "10vh",
+          width: themeValues.spacing(23),
+          height: themeValues.spacing(9),
           padding: 1.5,
           color: "#0c2465",
           backdropFilter: "blur(4px)",
@@ -39,10 +41,10 @@ export const SourceCard = ({
         }}
       >
         <Typography variant="subtitle2" fontWeight={600}>
-          {truncate(data.source.split("\\").pop() || "", 15)}
+          {truncate(data.source || "", 15)}
         </Typography>
         <Typography variant="caption" mt={1}>
-          {truncate(data.content)}
+            {truncate(FormatTextUtil.removeExtraDots(data.content))}
         </Typography>
       </ButtonBase>
     </motion.div>

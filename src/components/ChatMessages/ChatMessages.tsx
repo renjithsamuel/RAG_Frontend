@@ -1,5 +1,5 @@
 "use client";
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { useChatMessagesStyles } from "./ChatMessages.styles";
 import { useChatMessages } from "./ChatMessages.hooks";
 import ReactMarkdown from "react-markdown";
@@ -41,14 +41,15 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+
+
   return (
     <Box className={classes.messagesContainer}>
       {formattedMessages.map((message, index) => (
         <Box
           key={index}
-          className={`${classes.message} ${
-            message.isUser ? classes.userMessage : classes.botMessage
-          }`}
+          className={`${classes.message} ${message.isUser ? classes.userMessage : classes.botMessage
+            }`}
         >
           {message.isLoading ? (
             <>
@@ -81,6 +82,35 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
               />
             </>
           ) : (
+            // // old code
+            //             <ReactMarkdown
+            //   remarkPlugins={[remarkGfm]}
+            //   rehypePlugins={[rehypeRaw]}
+            //   components={{
+            //     code({ className, children, ...restProps }) {
+            //       const match = /language-(\w+)/.exec(className || "");
+            //       const { ref, ...propsForSH } = restProps as any;
+            //       return match ? (
+            //         <SyntaxHighlighter
+            //           style={codeTheme}
+            //           language={match[1]}
+            //           PreTag="div"
+            //           {...propsForSH}
+            //         >
+            //           {String(children).replace(/\n$/, "")}
+            //         </SyntaxHighlighter>
+            //       ) : (
+            //         <code className={className} {...propsForSH}>
+            //           {children}
+            //         </code>
+            //       );
+            //     },
+            //   }}
+            // >
+            //   {message.content}
+            // </ReactMarkdown>
+            // // old code end
+
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
@@ -103,10 +133,20 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
                     </code>
                   );
                 },
+                p({ children }) {
+                  return (
+                    <Typography
+                      sx={{ marginBottom: message.isUser ? 0 : 2, fontSize: 14, lineHeight: 1.6 }}
+                    >
+                      {children}
+                    </Typography>
+                  );
+                },
               }}
             >
-              {message.content}
+              {message.content.replace(/([^\n])\n(?=\*\*)/g, '$1\n\n')}
             </ReactMarkdown>
+
           )}
 
           {/* Sources if available */}

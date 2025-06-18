@@ -31,7 +31,16 @@ export const DocumentManagerModal = ({
   onAdd: () => void;
 }) => {
   const { setSnackBarError, collectionId } = usePageContext();
-  const { data: documents = [] } = useDocuments(collectionId);
+  const { data: documents = [], isLoading } = useDocuments(collectionId);
+  // const isLoading = false
+  // const documents = [
+  //   { filename: "Document1.pdf", id: "1" },
+  //   { filename: "Document1.pdf", id: "1" },
+  //   { filename: "Document1.pdf", id: "1" },
+  //   { filename: "Document2.docx", id: "2" },
+  //   { filename: "Document3.txt", id: "3" }
+  // ]
+
   const deleteDocument = useDeleteDocument(collectionId);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -68,12 +77,12 @@ export const DocumentManagerModal = ({
     <Dialog
       open={open}
       onClose={onClose}
-      maxWidth="md"
+      maxWidth="lg"
       fullWidth
       PaperProps={{
         sx: {
           // bgcolor: "rgba(243, 247, 249, 0.95)",
-          bgcolor: "#fff",
+          bgcolor: "#f5f5f5",
           borderRadius: 2,
           position: "relative",
           overflow: "visible", // to allow floating delete buttons etc.
@@ -104,30 +113,30 @@ export const DocumentManagerModal = ({
         </IconButton>
       </DialogTitle>
 
-      <DialogContent>
-        {deleteDocument.isLoading ? (
+      <DialogContent sx={{minHeight: 200, display: "flex", justifyContent: isLoading? "center" : "start", alignItems: "center"}}>
+        {(deleteDocument.isLoading || isLoading)  ? (
           <CircularProgress />
         ) : (
           <Box>
-            <Box sx={{ mt: 3, minHeight: 300 }}>
+            <Box sx={{ mt: 3, minHeight: 400 }}>
               <Box
                 display="grid"
                 gridTemplateColumns={{
-                  xs: "repeat(3, 1fr)",
-                  sm: "repeat(4, 1fr)",
-                  md: "repeat(5, 1fr)",
+                  xs: "repeat(2, 1fr)",
+                  sm: "repeat(3, 1fr)",
+                  md: "repeat(4, 1fr)",
                 }}
-                gap={2}
+                gap={1}
                 justifyContent="center"
                 alignItems={"center"}
               >
-                {documents.map((doc, i) => (
+                {documents?.length > 0 && documents.map((doc, i) => (
                   <DocumentCard
                     key={doc.id}
-                    name={doc.name}
+                    name={doc.filename}
                     onDeleteRequest={() => {
                       setConfirmOpen(true);
-                      setFileToDelete({ id: doc.id, name: doc.name });
+                      setFileToDelete({ id: doc.id, name: doc.filename });
                     }}
                   />
                 ))}
@@ -137,10 +146,12 @@ export const DocumentManagerModal = ({
                     onClick={onAdd}
                     focusRipple
                     sx={{
-                      width: 150,
+                      width: 250,
                       height: 60,
                       background: "#fff",
                       borderRadius: 2,
+                      m: 1.2,
+                      px: 2,
                       border: "2px dashed #b0b9c6",
                       display: "flex",
                       alignItems: "center",

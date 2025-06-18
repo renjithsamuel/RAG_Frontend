@@ -8,6 +8,7 @@ import { useSourceListStyles } from "./SourceList.styles";
 import { ISource } from "doc-bot/entity/Content/Chat";
 import { FaChevronUp } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
+import { themeValues } from "doc-bot/constants/ThemeConstants";
 
 export const SourceList = ({ sources }: { sources: ISource[] }) => {
   const classes = useSourceListStyles();
@@ -64,8 +65,8 @@ export const SourceList = ({ sources }: { sources: ISource[] }) => {
               onClick={handleMoreClick}
               focusRipple
               sx={{
-                width: 48,
-                height: 48,
+                width: themeValues.spacing(6),
+                height:  themeValues.spacing(6),
                 borderRadius: "50%",
                 // backgroundColor: "#fff",
                 display: "flex",

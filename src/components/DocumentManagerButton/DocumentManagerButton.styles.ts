@@ -7,7 +7,7 @@ export const useDocumentManagerButtonStyles = makeStyles(() => ({
     height: 36,
     borderRadius: "50%",
     backgroundColor: "#fff !important",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.53)",
     color: "#0c2465",
     display: "flex",
     alignItems: "center",
