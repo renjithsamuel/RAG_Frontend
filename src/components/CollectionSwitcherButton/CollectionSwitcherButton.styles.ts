@@ -7,8 +7,9 @@ export const useCollectionSwitcherStyles = makeStyles(() => ({
     alignItems: "center",
     padding: "6px 12px",
     borderRadius: "999px", // capsule
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.53)",
-    backgroundColor: "#fff",
+    // boxShadow: "0 2px 4px rgba(0, 0, 0, 0.53)",
+      border: "2px solid #b5b5b5 !important",
+    // backgroundColor: "#fff",
     // backgroundColor: "blue",
     color: "#0c2465",
     marginLeft: "auto",
@@ -17,7 +18,7 @@ export const useCollectionSwitcherStyles = makeStyles(() => ({
   },
   text: {
     paddingRight: themeValues.spacing(1),
-    fontWeight: "700 !important",
+    fontWeight: "500 !important",
     color: "#0c2465",
     minHeight: 24, // ✨ ensures consistent height
     display: "flex",

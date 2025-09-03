@@ -19,7 +19,7 @@ export const useSourceList = (sources: ISource[]) => {
   const handleMoreClick = () => {
     if (showAll) {
       // First, animate card exit
-      setVisibleSources(sources.slice(0, 2));
+      setVisibleSources(sources.slice(0, 3));
 
       // Wait for exit animation to complete
       setTimeout(() => {

@@ -22,11 +22,11 @@ export const QuickActions = ({ onActionClick }: QuickActionsParams) => {
   const { navBarOpen } = usePageContext();
   const classes = useQuickActionsStyles();
   const actions = [
-    "Factory reset guide",
     "Activate license key",
     "Set user permissions",
     "Steps to update firmware",
-    "Configure network settings",
+    "Eqipment Adaptor",
+    "E3 Adapters",
   ];
 
   return (

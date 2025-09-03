@@ -34,12 +34,14 @@ export const DocumentManagerModal = ({
   const { data: documents = [], isLoading } = useDocuments(collectionId);
   // const isLoading = false
   // const documents = [
-  //   { filename: "Document1.pdf", id: "1" },
-  //   { filename: "Document1.pdf", id: "1" },
-  //   { filename: "Document1.pdf", id: "1" },
-  //   { filename: "Document2.docx", id: "2" },
-  //   { filename: "Document3.txt", id: "3" }
+  //   { filename: "Document1.pdf", document_id: "1" },
+  //   { filename: "Document1.pdf", document_id: "1" },
+  //   { filename: "Document1.pdf", document_id: "1" },
+  //   { filename: "Document2.docx", document_id: "2" },
+  //   { filename: "Document3.txt", document_id: "3" }
   // ]
+
+  console.log("Documents:", documents);
 
   const deleteDocument = useDeleteDocument(collectionId);
 
@@ -132,11 +134,11 @@ export const DocumentManagerModal = ({
               >
                 {documents?.length > 0 && documents.map((doc, i) => (
                   <DocumentCard
-                    key={doc.id}
+                    key={doc.document_id}
                     name={doc.filename}
                     onDeleteRequest={() => {
                       setConfirmOpen(true);
-                      setFileToDelete({ id: doc.id, name: doc.filename });
+                      setFileToDelete({ id: doc.document_id, name: doc.filename });
                     }}
                   />
                 ))}

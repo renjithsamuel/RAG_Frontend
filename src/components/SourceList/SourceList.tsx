@@ -52,7 +52,7 @@ export const SourceList = ({ sources }: { sources: ISource[] }) => {
         </AnimatePresence>
 
         {/* collapse or show all */}
-        {sources.length > 2 && (
+        {sources.length > 3 && (
           <motion.div
             layout
             initial={{ opacity: 0, scale: 0.8 }}

@@ -10,7 +10,7 @@ export const useChatMessagesStyles = makeStyles((theme) => ({
     flexDirection: "column",
     gap: theme.spacing(2),
     width: "100%",
-    maxWidth: "800px",
+    maxWidth: "850px",
     margin: "0 auto",
     marginBottom: theme.spacing(10),
   },

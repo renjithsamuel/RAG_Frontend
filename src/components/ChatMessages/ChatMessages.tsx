@@ -31,6 +31,7 @@ export const ChatMessages = ({ messages }: ChatMessagesParams) => {
     }>;
   };
 
+
   const codeTheme = materialLight as { [key: string]: React.CSSProperties };
 
   // Anchor at end of chat
