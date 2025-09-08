@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import { Home } from "doc-bot/containers/Home/Home";
+import { MainTabs } from "doc-bot/containers/MainTabs/MainTabs";
 
 export default function Page() {
   return (
     <Box>
-      <Home />
+      <MainTabs />
     </Box>
   );
 }

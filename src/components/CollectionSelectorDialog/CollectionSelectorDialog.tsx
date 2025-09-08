@@ -36,15 +36,15 @@ export const CollectionSelectorDialog = ({
   const [createOpen, setCreateOpen] = useState(false);
 
   const { setSnackBarError } = usePageContext();
-  const { data: collections = [], isLoading, isError } = useCollections();
+  // const { data: collections = [], isLoading, isError } = useCollections();
   // collection mock
-  // let isLoading = false
-  // let isError = false
-  // let collections = [
-  //   { name: "Collection 1", id: "1" },
-  //   { name: "Collection 2", id: "2" },
-  //   { name: "Collection 3", id: "3" }
-  // ]
+  let isLoading = false
+  let isError = false
+  let collections = [
+    { name: "Collection 1", id: "1" },
+    { name: "Collection 2", id: "2" },
+    { name: "Collection 3", id: "3" }
+  ]
 
   const createCollection = useCreateCollection();
 
